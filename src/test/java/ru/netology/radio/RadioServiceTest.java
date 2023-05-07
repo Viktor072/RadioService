@@ -7,209 +7,172 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioServiceTest {
 
     @Test
-    public void setMaxStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
-        radio.setCurrentStation(5);
-        int excepted = 9;
-        assertEquals(excepted, radio.getMaxStation());
+    void setMaxOneArgStation() {
+        RadioService radio = new RadioService(10);
+
+        assertEquals(10, radio.getMaxStation());
+
     }
 
     @Test
-    public void setMinStation() {
+    void setMaxNoArgsStation() {
         RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
-        radio.setCurrentStation(2);
-        int excepted = 0;
-        assertEquals(excepted, radio.getMinStation());
+
+        assertEquals(9, radio.getMaxStation());
     }
 
     @Test
-    public void setCurrentStation() {
-        RadioService radioman = new RadioService();
-        radioman.setMaxStation(9);
-        radioman.setMinStation(0);
-        radioman.setCurrentStation(3);
-        int excepted = 3;
-        assertEquals(excepted, radioman.getCurrentStation());
+    void SetMinNoArgsStation() {
+        RadioService radio = new RadioService();
+
+        assertEquals(0, radio.getMinStation());
     }
 
     @Test
-    public void setCurrentStationOverMaxStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
-        radio.setCurrentStation(10);
-        int excepted = 9;
-        assertEquals(excepted, radio.getCurrentStation());
+    void setMinArgsStation() {
+        RadioService radio = new RadioService(9,0,5,100,0,50);
+
+        assertEquals(0, radio.getMinStation());
     }
 
     @Test
-    public void setCurrentStationEquallyMinStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
+    void setCurrentArgsStation() {
+        RadioService radio = new RadioService(5,30);
+
+        assertEquals(5, radio.getCurrentStation());
+    }
+
+    @Test
+    void setCurrentStation() {
+        RadioService radio = new RadioService(9,2,52);
+
+        assertEquals(2, radio.getCurrentStation());
+    }
+
+    @Test
+    void setCurrentStationOverMaxStation() {
+        RadioService radio = new RadioService(9,5,22);
+        radio.setCurrentStation(20);
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    @Test
+    void setCurrentStationEquallyMinStation() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentStation(0);
-        int excepted = 0;
-        assertEquals(excepted, radio.getCurrentStation());
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void setCurrentStationUnderMinStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
-        radio.setCurrentStation(-1);
-        int excepted = 0;
-        assertEquals(excepted, radio.getCurrentStation());
+    void setCurrentStationUnderMinStation() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+        radio.setCurrentStation(-12);
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void setMaxVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(4);
-        int excepted = 10;
-        assertEquals(excepted, radio.getMaxVolume());
+    void setMaxVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+
+        assertEquals(100, radio.getMaxVolume());
     }
 
     @Test
-    public void setMinVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(80);
-        int excepted = 0;
-        assertEquals(excepted, radio.getMinVolume());
+    void setMinVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+
+        assertEquals(0, radio.getMinVolume());
     }
 
     @Test
-    public void setCurrentVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(90);
-        int excepted = 90;
-        assertEquals(excepted, radio.getCurrentVolume());
+    void setCurrentVolume() {
+        RadioService radio = new RadioService(9,7,25);
+
+        assertEquals(25, radio.getCurrentVolume());
     }
 
     @Test
-    public void setCurrentVolumeOverMaxVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(120);
-        int excepted = 100;
-        assertEquals(excepted, radio.getCurrentVolume());
+    void setCurrentVolumeOverMaxVolume() {
+        RadioService radio = new RadioService(9,0,5,100,0,100);
+        radio.setCurrentVolume(102);
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
-    public void setCurrentVolumeEquallyMinVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
+    void setCurrentVolumeEquallyMinVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentVolume(0);
-        int excepted = 0;
-        assertEquals(excepted, radio.getCurrentVolume());
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void setCurrentVolumeUnderMinVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
+    void setCurrentVolumeUnderMinVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentVolume(-2);
-        int excepted = 0;
-        assertEquals(excepted, radio.getCurrentVolume());
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void upVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(50);
+    void upVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+        radio.setCurrentVolume(95);
         radio.upVolume();
-        int excepted = 51;
-        assertEquals(excepted, radio.getCurrentVolume());
+        assertEquals(96, radio.getCurrentVolume());
     }
 
     @Test
-    public void upVolumeOverMaxVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(120);
+    void upVolumeOverMaxVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+        radio.setCurrentVolume(105);
         radio.upVolume();
-        int excepted = 100;
-        assertEquals(excepted, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
-    public void downVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(50);
+    void downVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+        radio.setCurrentVolume(5);
         radio.downVolume();
-        int excepted = 49;
-        assertEquals(excepted, radio.getCurrentVolume());
+        assertEquals(4, radio.getCurrentVolume());
     }
 
     @Test
-    public void downVolumeOverMinVolume() {
-        RadioService radio = new RadioService();
-        radio.setMaxVolume(100);
-        radio.setMinVolume(0);
-        radio.setCurrentVolume(-50);
+    void downVolumeOverMinVolume() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
+        radio.setCurrentVolume(-5);
         radio.downVolume();
-        int excepted = 0;
-        assertEquals(excepted, radio.getCurrentVolume());
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void nextStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
+    void nextStation() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentStation(3);
         radio.nextStation();
-        int excepted = 4;
-        assertEquals(excepted, radio.getCurrentStation());
+        assertEquals(4, radio.getCurrentStation());
     }
 
     @Test
-    public void nextStationAfterMaxStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
+    void nextStationAfterMaxStation() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentStation(10);
         radio.nextStation();
-        int excepted = 0;
-        assertEquals(excepted, radio.getCurrentStation());
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void prevStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
+    void prevStation() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentStation(3);
         radio.prevStation();
-        int excepted = 2;
-        assertEquals(excepted, radio.getCurrentStation());
+        assertEquals(2, radio.getCurrentStation());
     }
+
     @Test
-    public void prevStationAfterMinStation() {
-        RadioService radio = new RadioService();
-        radio.setMaxStation(9);
-        radio.setMinStation(0);
+    void prevStationAfterMinStation() {
+        RadioService radio = new RadioService(9, 0, 5, 100, 0, 50);
         radio.setCurrentStation(-1);
         radio.prevStation();
-        int excepted = 9;
-        assertEquals(excepted, radio.getCurrentStation());
+        assertEquals(9, radio.getCurrentStation());
     }
 }
