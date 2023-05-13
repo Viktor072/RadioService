@@ -1,8 +1,8 @@
 package ru.netology.radio;
 
-public class RadioService {
 
-    private int maxStation = 9;
+public class RadioService {
+    private int maxStation;
     private int minStation = 0;
     private int currentStation;
     private int maxVolume = 100;
@@ -20,10 +20,11 @@ public class RadioService {
     }
 
     public RadioService() {
+        maxStation = 9;
     }
 
-    public RadioService(int maxStation) {
-        this.maxStation = maxStation;
+    public RadioService(int stationsCont) {
+        maxStation = stationsCont - 1;
     }
 
     public RadioService(int maxStation, int currentStation, int currentVolume) {
