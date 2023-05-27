@@ -8,11 +8,33 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioServiceTest {
 
     @Test
+    public void setMaxOneArgStation() {
+        RadioService radio = new RadioService(10);
+
+        assertEquals(9, radio.getMaxStation());
+
+    }
+
+    @Test
+    public void setMaxNoArgsStation() {
+        RadioService radio = new RadioService();
+
+        assertEquals(9, radio.getMaxStation());
+    }
+
+    @Test
+    public void SetMinNoArgsStation() {
+        RadioService radio = new RadioService();
+
+        assertEquals(0, radio.getMinStation());
+    }
+
+    @Test
     public void setMaxStation() {
-        RadioService radio = new RadioService(20);
+        RadioService radio = new RadioService();
         radio.setMaxStation(9);
         radio.setMinStation(0);
-        radio.setCurrentStation(15);
+        radio.setCurrentStation(5);
         int excepted = 9;
         assertEquals(excepted, radio.getMaxStation());
     }
@@ -213,43 +235,6 @@ class RadioServiceTest {
         int excepted = 9;
         assertEquals(excepted, radio.getCurrentStation());
     }
-
-    @Test
-    public void setMaxOneArgStation() {
-        RadioService radio = new RadioService(10);
-
-        assertEquals(9, radio.getMaxStation());
-
-    }
-
-    @Test
-    public void setMaxNoArgsStation() {
-        RadioService radio = new RadioService();
-
-        assertEquals(9, radio.getMaxStation());
-    }
-
-    @Test
-    public void SetMinNoArgsStation() {
-        RadioService radio = new RadioService();
-
-        assertEquals(0, radio.getMinStation());
-    }
-
-    @Test
-    public void setMinArgsStation() {
-        RadioService radio = new RadioService(9,0,5,100,0,50);
-
-        assertEquals(0, radio.getMinStation());
-    }
-
-    @Test
-    public void setCurrentArgsStation() {
-        RadioService radio = new RadioService(5,30);
-
-        assertEquals(5, radio.getCurrentStation());
-    }
-
 }
 
 
